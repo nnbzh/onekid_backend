@@ -22,7 +22,7 @@ class LoginService
         $phone  = PhoneNumberFormatter::clear($phone);
         $code   = RandomCodeGenerator::generate();
         $this->smsRepository->send($phone, $code);
-        dd($this->smsRepository->send($phone, $code));
+        return $this->smsRepository->send($phone, $code);
         return $this->loginRepository->save($phone, $code);
     }
 

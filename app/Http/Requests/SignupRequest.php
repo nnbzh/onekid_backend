@@ -8,9 +8,9 @@ class SignupRequest extends FormRequest
 {
     /**
      * @OA\Post (
-     *     path="/api/v1/register",
+     *     path="/api/v1/auth",
      *     summary = "Register user and login by sms",
-     *     operationId="auth.register",
+     *     operationId="auth.save",
      *     tags={"Auth"},
     *       @OA\RequestBody(
      *       required=true,
