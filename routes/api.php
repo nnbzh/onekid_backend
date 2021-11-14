@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'v1'], function () {
     Route::group(['namespace' => 'App\Http\Controllers\Api\v1'], function () {
-        Route::post('auth', 'AuthController@loginByPhone');
+        Route::post('auth', 'AuthController@loginByPhone')->middleware(['throttle:5,5']);
         Route::post('login', 'AuthController@loginByUsername');
         Route::post('verify', 'AuthController@verify');
         Route::group(['middleware' => 'auth:api'], function ()  {

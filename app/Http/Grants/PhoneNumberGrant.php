@@ -3,6 +3,7 @@
 namespace App\Http\Grants;
 
 use App\Exceptions\InvalidCodeException;
+use App\Exceptions\SmsCodeExpiredException;
 use App\Helpers\PhoneNumberFormatter;
 use App\Helpers\RedisCache;
 use App\Models\User;
@@ -99,8 +100,12 @@ class PhoneNumberGrant extends AbstractGrant
         $phoneNumber =  PhoneNumberFormatter::clear($request->get('phone_number'));
         $value = $this->redis->get(self::PHONE_CODE_REDIS_KEY.$phoneNumber);
 
+        if (! $value) {
+            throw new SmsCodeExpiredException();
+        }
+
         if ($value['code'] !== $request->get('code')) {
-            throw new InvalidCodeException()    ;
+            throw new InvalidCodeException();
         }
 
         $user = User::query()->find($value['user_id']);

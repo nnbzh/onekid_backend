@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use App\Traits\ApiResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Laravel\Passport\Exceptions\OAuthServerException;
 use Throwable;
 
@@ -56,6 +57,14 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof InvalidCodeException) {
             return $this->errorResponse($exception->getCode(), $exception->getMessage());
+        }
+
+        if ($exception instanceof SmsCodeExpiredException) {
+            return $this->errorResponse($exception->getCode(), $exception->getMessage());
+        }
+
+        if ($exception instanceof ThrottleRequestsException) {
+            return $this->errorResponse(400, "Вы совершили слишком много попыток, попробуйте позже.");
         }
 
         if ($exception instanceof OAuthServerException) {

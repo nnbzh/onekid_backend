@@ -24,7 +24,7 @@ class AuthController extends BaseController
      * @param SignupRequest $request
      * @return JsonResponse
      */
-    public function loginByPhone(SignupRequest $request): JsonResponse
+    public function auth(SignupRequest $request): JsonResponse
     {
         return $this->successResponse($this->loginService->save($request->get('phone_number')));
     }

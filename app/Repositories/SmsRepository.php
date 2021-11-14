@@ -22,9 +22,10 @@ class SmsRepository
             'recipient' => "$phone",
             'text'      => "Код для входа в приложение: $code",
         ];
+        $url = "$this->host/service/message/sendSmsMessage?output=json&api={$this->version}&apiKey={$this->apiKey}";
 
-        return Http::post(
-            "$this->host/service/Message/sendSmsMessage?output=json&api={$this->version}&apiKey={$this->apiKey}", $body
-        )->json();
+        return Http::withHeaders(["content-type" => "application/x-www-form-urlencoded"])
+            ->post($url, $body)
+            ->json();
     }
 }

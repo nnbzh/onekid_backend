@@ -17,7 +17,7 @@ class LoginRepository
         $this->redis->set(self::PHONE_CODE_REDIS_KEY.$phone, [
             "code"      => $code,
             "user_id"   => $user->id
-        ], 60);
+        ], 120);
         
         return $user;
     }

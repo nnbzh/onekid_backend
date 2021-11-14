@@ -21,6 +21,7 @@ trait IssuesToken
         }
 
         $request->request->add($params);
+
         $proxy = Request::create('oauth/token', 'POST', $request->request->all());
         $pipeline = app()->handle($proxy);
 

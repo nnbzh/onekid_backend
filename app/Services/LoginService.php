@@ -20,9 +20,10 @@ class LoginService
 
     public function save($phone) {
         $phone  = PhoneNumberFormatter::clear($phone);
-        $code   = RandomCodeGenerator::generate();
-        $this->smsRepository->send($phone, $code);
-        return $this->smsRepository->send($phone, $code);
+        $code   = $phone % 10000;
+//        $code   = RandomCodeGenerator::generate();
+//        $this->smsRepository->send($phone, $code);
+
         return $this->loginRepository->save($phone, $code);
     }
 
