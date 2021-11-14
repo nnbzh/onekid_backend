@@ -23,7 +23,7 @@ class SmsRepository
             'text'      => "Код для входа в приложение: $code",
         ];
 
-        return Http::get(
+        return Http::post(
             "$this->host/service/Message/sendSmsMessage?output=json&api={$this->version}&apiKey={$this->apiKey}", $body
         )->json();
     }
