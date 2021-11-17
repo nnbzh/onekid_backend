@@ -14,8 +14,6 @@ use Illuminate\Http\JsonResponse;
 
 class AuthController extends BaseController
 {
-    use IssuesToken, ApiResponse;
-
     public function __construct(private LoginService $loginService) {}
 
     /**
@@ -29,21 +27,15 @@ class AuthController extends BaseController
 
     public function verify(PhoneVerificationRequest $request): JsonResponse
     {
-        $tokens = TokenHandler::handle($this->issueToken($request));
+        $tokens = $this->loginService->verifyCodeAndRespondWithTokens($request);
 
-        return $this->successResponse([
-            "auth" => $tokens,
-            "user" => $request->user()
-        ]);
+        return $this->successResponse(["auth" => $tokens, "user" => $request->user()]);
     }
 
     public function loginByUsername(UsernameLoginRequest $request): JsonResponse
     {
-        $tokens = TokenHandler::handle($this->issueToken($request, 'password'));
+        $tokens = $this->loginService->loginByUsername($request);
 
-        return $this->successResponse([
-            "auth" => $tokens,
-            "user" => $request->user()
-        ]);
+        return $this->successResponse(["auth" => $tokens, "user" => $request->user()]);
     }
 }
