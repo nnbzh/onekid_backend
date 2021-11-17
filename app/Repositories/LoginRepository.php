@@ -7,7 +7,7 @@ use App\Models\User;
 
 class LoginRepository
 {
-    const  PHONE_CODE_REDIS_KEY = 'phone_number/code/';
+    const PHONE_CODE_REDIS_KEY = 'phone_number/code/';
 
     public function __construct(private RedisCache $redis) {}
 

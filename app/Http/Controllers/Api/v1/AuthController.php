@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Helpers\PhoneNumberFormatter;
 use App\Helpers\TokenHandler;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\PhoneVerificationRequest;
 use App\Http\Requests\SignupRequest;
 use App\Http\Requests\UsernameLoginRequest;
-use App\Models\User;
 use App\Services\LoginService;
 use App\Traits\ApiResponse;
 use App\Traits\IssuesToken;
