@@ -16,7 +16,7 @@ class ClassTemplate extends TimestampedModel
         'category_id'
     ];
 
-    public function centre() {
-        return $this->belongsTo(Centre::class, 'center_id', 'id');
+    public function center() {
+        return $this->belongsTo(Center::class, 'center_id', 'id');
     }
 }

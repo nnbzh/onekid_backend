@@ -68,7 +68,7 @@ class CategoryController extends BaseController
      */
     public function get($id) {
         $category = ClassCategory::query()->findOrFail($id);
-        $classTemplates = $category->classTemplates()->with('centre');
+        $classTemplates = $category->classTemplates()->with('center');
 
         if (! empty($keyword = request()->get('keyword'))) {
             $classTemplates->where('name', 'ilike', "$keyword%");

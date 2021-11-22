@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Centre extends TimestampedModel
+class Center extends TimestampedModel
 {
     use HasFactory;
 

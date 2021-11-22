@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\BaseController;
-use App\Models\Filters\GenderFilter;
 use App\Models\Gender;
 use Illuminate\Http\JsonResponse;
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCentresTable extends Migration
+class CreateCentersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCentresTable extends Migration
      */
     public function up()
     {
-        Schema::create('centres', function (Blueprint $table) {
+        Schema::create('centers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->foreignId('business_id')->references('id')->on('businesses')->cascadeOnDelete();
@@ -28,6 +28,6 @@ class CreateCentresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('centres');
+        Schema::dropIfExists('centers');
     }
 }

@@ -8,8 +8,6 @@ use App\Http\Requests\PhoneVerificationRequest;
 use App\Http\Requests\SignupRequest;
 use App\Http\Requests\UsernameLoginRequest;
 use App\Services\LoginService;
-use App\Traits\ApiResponse;
-use App\Traits\IssuesToken;
 use Illuminate\Http\JsonResponse;
 
 class AuthController extends BaseController

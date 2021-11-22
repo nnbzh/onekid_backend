@@ -8,7 +8,6 @@ use App\Helpers\TokenHandler;
 use App\Repositories\LoginRepository;
 use App\Repositories\SmsRepository;
 use App\Traits\IssuesToken;
-use Illuminate\Support\Facades\Http;
 
 class LoginService
 {
@@ -21,9 +20,13 @@ class LoginService
 
     public function save($phone) {
         $phone  = PhoneNumberFormatter::clear($phone);
-//        $code   = $phone % 10000;
-        $code   = RandomCodeGenerator::generate();
-        $this->smsRepository->send($phone, $code);
+
+        if (config('app.env') !== 'production') {
+            $code   = $phone % 10000;
+        } else {
+            $code   = RandomCodeGenerator::generate();
+            $this->smsRepository->send($phone, $code);
+        }
 
         return $this->loginRepository->save($phone, $code);
     }
