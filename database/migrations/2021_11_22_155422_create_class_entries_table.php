@@ -1,6 +1,6 @@
 <?php
 
-use App\Helpers\Status\EntryStatuses;
+use App\Helpers\EntryStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +18,7 @@ class CreateClassEntriesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreignId('class_entity_id')->references('id')->on('class_entities')->restrictOnDelete();
-            $table->string('status')->default(EntryStatuses::PENDING);
+            $table->string('status')->default(EntryStatus::PENDING);
             $table->timestamps();
         });
     }

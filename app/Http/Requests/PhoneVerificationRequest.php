@@ -41,8 +41,8 @@ class PhoneVerificationRequest extends FormRequest
      */
     public function rules() {
         return [
-            "phone_number"  => "required|regex:/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/",
-            "code"          => "required|int"
+            "phone"     => "required|regex:/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/",
+            "code"      => "required|int"
         ];
     }
 }

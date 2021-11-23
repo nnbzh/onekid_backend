@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Helpers;
-
+namespace App\Helpers\Redis;
 
 use Redis;
 

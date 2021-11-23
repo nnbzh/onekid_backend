@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Helpers\Status;
+namespace App\Helpers;
 
-class EntryStatuses
+class EntryStatus
 {
     public const APPROVED   = 'approved';
     public const VISITED    = 'visited';

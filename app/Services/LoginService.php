@@ -3,46 +3,43 @@
 namespace App\Services;
 
 use App\Helpers\PhoneNumberFormatter;
-use App\Helpers\RandomCodeGenerator;
+use App\Helpers\Redis\RedisCache;
+use App\Helpers\Redis\RedisKey;
 use App\Helpers\TokenHandler;
-use App\Repositories\LoginRepository;
 use App\Repositories\SmsRepository;
+use App\Repositories\UserRepository;
 use App\Traits\IssuesToken;
+use Illuminate\Http\Request;
 
 class LoginService
 {
     use IssuesToken;
 
     public function __construct(
-        private LoginRepository $loginRepository,
         private SmsRepository $smsRepository,
+        private UserRepository $userRepository,
+        private RedisCache $redis
     ) {}
 
-    public function save($phone) {
+    public function requestCode($phone) {
         $phone  = PhoneNumberFormatter::clear($phone);
+        $code   = $phone % 10000;
+        $user   = $this->userRepository->findByPhoneOrCreate($phone);
+        $this->redis->set(RedisKey::AUTH_CODE.$phone, [
+            "code"      => $code,
+            "user_id"   => $user->id
+        ], 120);
 
-        if (config('app.env') !== 'production') {
-            $code   = $phone % 10000;
-        } else {
-            $code   = RandomCodeGenerator::generate();
-            $this->smsRepository->send($phone, $code);
-        }
+//        $code   = RandomCodeGenerator::generate();
+//        $this->smsRepository->send($phone, $code);
 
-        return $this->loginRepository->save($phone, $code);
+        return true;
     }
 
-    public function verifyCodeAndRespondWithTokens($request) {
-        return $this->respondWithTokens($request, 'phone_number');
-    }
+    public function auth(Request $request, $grant = 'phone_number') {
+        $tokens = json_decode($this->issueToken($request, $grant)->getContent(), true);
 
-    public function loginByUsername($request) {
-        return $this->respondWithTokens($request, 'password');
-    }
-
-    private function respondWithTokens($request, $grant = 'phone_number') {
-        $tokens = $this->issueToken($request, $grant);
-
-        return TokenHandler::handle($tokens);
+        return $tokens['access_token'] ?? null;
     }
 
 }

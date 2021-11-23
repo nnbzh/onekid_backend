@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\PostUserProfileRequest;
+use App\Http\Requests\InitialUpdateRequest;
 use Illuminate\Http\JsonResponse;
 
 class UserProfileController extends BaseController
 {
-    public function create(PostUserProfileRequest $request): JsonResponse
+    public function create(InitialUpdateRequest $request): JsonResponse
     {
         $user = $request->user();
         $user->update($request->get('user'));

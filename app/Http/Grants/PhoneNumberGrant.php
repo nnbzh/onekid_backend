@@ -5,7 +5,8 @@ namespace App\Http\Grants;
 use App\Exceptions\InvalidCodeException;
 use App\Exceptions\SmsCodeExpiredException;
 use App\Helpers\PhoneNumberFormatter;
-use App\Helpers\RedisCache;
+use App\Helpers\Redis\RedisCache;
+use App\Helpers\Redis\RedisKey;
 use App\Models\User;
 use DateInterval;
 use Illuminate\Http\Request;
@@ -21,8 +22,6 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class PhoneNumberGrant extends AbstractGrant
 {
-    const  PHONE_CODE_REDIS_KEY = 'phone_number/code/';
-
     private RedisCache $redis;
 
     /**
@@ -69,14 +68,14 @@ class PhoneNumberGrant extends AbstractGrant
 
     public function validateUser(ServerRequestInterface $request) {
         $code = $this->getRequestParameter('code', $request);
-        $phoneNumber = $this->getRequestParameter('phone_number', $request);
+        $phoneNumber = $this->getRequestParameter('phone', $request);
 
         if (empty($code)) {
             throw OAuthServerException::invalidRequest('code');
         }
 
         if (empty($phoneNumber)) {
-            throw OAuthServerException::invalidRequest('phone_number');
+            throw OAuthServerException::invalidRequest('phone');
         }
 
         $user = $this->validateCodeAndGetUser(new Request($request->getParsedBody()));
@@ -97,8 +96,8 @@ class PhoneNumberGrant extends AbstractGrant
             throw new RuntimeException('Unable to determine authentication model from configuration.');
         }
 
-        $phoneNumber =  PhoneNumberFormatter::clear($request->get('phone_number'));
-        $value = $this->redis->get(self::PHONE_CODE_REDIS_KEY.$phoneNumber);
+        $phoneNumber =  PhoneNumberFormatter::clear($request->get('phone'));
+        $value = $this->redis->get(RedisKey::AUTH_CODE.$phoneNumber);
 
         if (! $value) {
             throw new SmsCodeExpiredException();

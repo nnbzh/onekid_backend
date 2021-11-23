@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Helpers\RedisCache;
+use App\Helpers\Redis\RedisCache;
 use App\Http\Grants\PhoneNumberGrant;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Bridge\RefreshTokenRepository;

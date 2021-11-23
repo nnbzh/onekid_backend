@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Helpers\TokenHandler;
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\PhoneVerificationRequest;
 use App\Http\Requests\SignupRequest;
 use App\Http\Requests\UsernameLoginRequest;
+use App\Http\Resources\UserResource;
 use App\Services\LoginService;
 use Illuminate\Http\JsonResponse;
 
-class AuthController extends BaseController
+class AuthController extends Controller
 {
     public function __construct(private LoginService $loginService) {}
 
@@ -20,20 +20,22 @@ class AuthController extends BaseController
      */
     public function auth(SignupRequest $request): JsonResponse
     {
-        return $this->successResponse($this->loginService->save($request->get('phone_number')));
+        return response()->json(['success' => $this->loginService->requestCode($request->get('phone'))]);
     }
 
-    public function verify(PhoneVerificationRequest $request): JsonResponse
+    public function verify(PhoneVerificationRequest $request)
     {
-        $tokens = $this->loginService->verifyCodeAndRespondWithTokens($request);
+        $accessToken = $this->loginService->auth($request);
+        request()->headers->set('Authorization', "Bearer $accessToken");
 
-        return $this->successResponse(["auth" => $tokens, "user" => $request->user()]);
+        return (new UserResource(request()->user('api')))->additional(['access_token' => $accessToken]);
     }
 
-    public function loginByUsername(UsernameLoginRequest $request): JsonResponse
+    public function login(UsernameLoginRequest $request)
     {
-        $tokens = $this->loginService->loginByUsername($request);
+        $accessToken = $this->loginService->auth($request, 'password');
+        request()->headers->set('Authorization', "Bearer $accessToken");
 
-        return $this->successResponse(["auth" => $tokens, "user" => $request->user()]);
+        return (new UserResource(request()->user('api')))->additional(['access_token' => $accessToken]);
     }
 }

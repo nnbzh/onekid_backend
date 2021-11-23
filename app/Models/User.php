@@ -19,15 +19,18 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'phone_number',
+        'phone',
         'username',
         'password',
-        'first_name',
         'last_name',
         'is_verified',
-        'email'
+        'email',
+        'parent_id',
+        'gender',
+        'birth_date',
+        'avatar_url',
+        'first_name',
     ];
-
     /**
      * The attributes excluded from the model's JSON form.
      *
@@ -39,15 +42,20 @@ class User extends Authenticatable
         'updated_at'
     ];
 
-    public function profile() {
-        return $this->hasOne(UserProfile::class, 'user_id', 'id');
-    }
-
     public function findForPassport($username) {
         return User::query()->where('username', $username)->first();
     }
 
     public function children() {
-        return $this->hasMany(User::class, 'parent_id', 'id');
+        return $this->hasMany(User::class, 'parent_id');
+    }
+
+    public function parent() {
+        return $this->belongsTo(User::class, 'parent_id');
+    }
+
+    public function isParent(): bool
+    {
+        return $this->parent()->doesntExist();
     }
 }
