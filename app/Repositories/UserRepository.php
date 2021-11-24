@@ -16,4 +16,8 @@ class UserRepository
 
         return $user->refresh();
     }
+
+    public function create($attributes) {
+        return User::query()->create($attributes);
+    }
 }

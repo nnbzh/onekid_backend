@@ -10,7 +10,7 @@ class UserPolicy
         return $user->isParent();
     }
 
-    public function edit(User $user, User $second) {
+    public function update(User $user, User $second) {
         return $second->parent_id = $user->id || $user->id == $second->id;
     }
 

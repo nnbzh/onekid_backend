@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1;
+namespace App\Http\Controllers\Api;
 
-use App\Helpers\Pagination;
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Controller;
 use App\Models\ClassCategory;
 use Illuminate\Http\JsonResponse;
 
-class CategoryController extends BaseController
+class CategoryController extends Controller
 {
 
     /**
