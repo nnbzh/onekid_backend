@@ -10,7 +10,8 @@ class PostChildRequest extends FormRequest
         return [
             "first_name"   => "required|string",
             "username"     => "required|string|unique:users,username",
-            "password"     => "required"
+            "password"     => "required",
+            'avatar_url'   => "nullable|string"
         ];
     }
 }
