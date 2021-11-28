@@ -19,6 +19,7 @@ class CreateClassTemplatesTable extends Migration
             $table->string('description');
             $table->foreignId('center_id')->references('id')->on('centers')->cascadeOnDelete();
             $table->foreignId('category_id')->references('id')->on('class_categories')->cascadeOnDelete();
+            $table->string('img_src')->nullable();
             $table->timestamps();
         });
     }

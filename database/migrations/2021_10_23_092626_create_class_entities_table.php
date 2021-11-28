@@ -19,7 +19,6 @@ class CreateClassEntitiesTable extends Migration
             $table->time('start_time');
             $table->time('finish_time');
             $table->integer('places_available');
-            $table->string('code')->unique();
             $table->foreignId('template_id')->references('id')->on('class_templates')->cascadeOnDelete();
             $table->timestamps();
         });

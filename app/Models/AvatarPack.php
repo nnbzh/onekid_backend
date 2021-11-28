@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AvatarPack extends TimestampedModel
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     protected $table = 'avatar_packs';
 
     protected $fillable = [

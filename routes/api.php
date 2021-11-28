@@ -18,10 +18,15 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('login', 'AuthController@loginByUsername');
     Route::group(['middleware' => 'auth:api'], function () {
         Route::apiResource('images', 'ImageController')->only(['store']);
-        Route::apiResource('avatars', 'AvatarPackController')->only(['index', 'store']);
         Route::group(['prefix' => 'user'], function () {
             Route::put('', 'UserController@update');
             Route::apiResource('children', 'ChildrenController')->except(['update', 'show']);
         });
+        Route::apiResource('categories', 'CategoryController')->only(['index'])->names([
+            'index' => 'categories.list'
+        ]);
+        Route::apiResource('avatars', 'AvatarPackController')->only(['index'])->names([
+            'index' => 'avatars.list'
+        ]);
     });
 });

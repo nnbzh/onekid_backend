@@ -2,10 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class ClassEntry extends Model
+class ClassEntry extends TimestampedModel
 {
-    use HasFactory;
+    protected $table = 'class_entries';
+
+    protected $fillable = [
+        'id',
+        'class_entity_id',
+        'user_id',
+        'status'
+    ];
+
+    public function classEntity() {
+        return $this->belongsTo(ClassEntity::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

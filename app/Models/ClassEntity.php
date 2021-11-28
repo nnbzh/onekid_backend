@@ -2,10 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class ClassEntity extends Model
+class ClassEntity extends TimestampedModel
 {
-    use HasFactory;
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
+    protected $table = 'class_entities';
+
+    protected $fillable = [
+        'weekday',
+        'start_time',
+        'end_time',
+        'places_available',
+        'template_id'
+    ];
+
+    public function template() {
+        return $this->belongsTo(ClassTemplate::class, 'template_id');
+    }
 }

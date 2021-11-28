@@ -11,3 +11,15 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+
+/public/css/pages
+/public/css/themes
+/public/packages
+/public/js
+/public/media
+/public/plugins
+/App/Console/Commands/RevokePayment.php
+.phpstorm.meta.php
+_ide_helper.php
+/storage/*.key
+/storage/clockwork

@@ -16,7 +16,10 @@ class CreateCentersTable extends Migration
         Schema::create('centers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('code')->unique();
             $table->foreignId('business_id')->references('id')->on('businesses')->cascadeOnDelete();
+            $table->string('lat');
+            $table->string('lng');
             $table->timestamps();
         });
     }
