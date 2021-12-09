@@ -3,6 +3,8 @@
 namespace App\Models;
 
 
+use App\Helpers\EntryStatus;
+
 class ClassEntry extends TimestampedModel
 {
     protected $table = 'class_entries';
@@ -14,8 +16,8 @@ class ClassEntry extends TimestampedModel
         'status'
     ];
 
-    public function classEntity() {
-        return $this->belongsTo(ClassEntity::class);
+    public function entity() {
+        return $this->belongsTo(ClassEntity::class, 'class_entity_id');
     }
 
     public function user() {

@@ -21,7 +21,7 @@ class ClassEntityCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -33,7 +33,7 @@ class ClassEntityCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -41,20 +41,20 @@ class ClassEntityCrudController extends CrudController
     {
         CRUD::column('weekday');
         CRUD::column('start_time');
-        CRUD::column('end_time');
+        CRUD::column('finish_time');
         CRUD::column('places_available');
         CRUD::column('template_id');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
+         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
     }
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -64,20 +64,20 @@ class ClassEntityCrudController extends CrudController
 
         CRUD::field('weekday');
         CRUD::field('start_time');
-        CRUD::field('end_time');
+        CRUD::field('finish_time');
         CRUD::field('places_available');
         CRUD::field('template_id');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
+         * - CRUD::addField(['name' => 'price', 'type' => 'number']));
          */
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

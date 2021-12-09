@@ -25,4 +25,8 @@ class ClassTemplate extends TimestampedModel
     public function classCategory() {
         return $this->belongsTo(ClassCategory::class, 'category_id');
     }
+
+    public function entities() {
+        return $this->hasMany(ClassEntity::class, 'template_id');
+    }
 }

@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\Reviewable;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Center extends TimestampedModel
 {
-    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
-    use HasFactory;
+    use HasFactory, CrudTrait, Reviewable;
 
     protected $fillable = [
         'name',
@@ -19,5 +20,9 @@ class Center extends TimestampedModel
 
     public function business() {
         return $this->belongsTo(Business::class);
+    }
+
+    public function getQrCodeAttribute() {
+        return route('centers.qr-code', ['code' => $this->attributes['code']]);
     }
 }

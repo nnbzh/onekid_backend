@@ -11,12 +11,9 @@ class CategoryResource extends JsonResource
         $resource = [
             'id'        => $this->id,
             'name'      => $this->name,
-            'img_src'   => $this->img_url
+            'img_src'   => $this->img_url,
+            'templates_count' => $this->templates_count
         ];
-
-        if ($this->templates_count) {
-            $resource['templates_count'] = $this->templates_count;
-        }
 
         return $resource;
     }

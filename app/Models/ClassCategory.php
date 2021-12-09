@@ -6,9 +6,6 @@ use App\Traits\HasFilters;
 use App\Traits\Imageable;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Intervention\Image\ImageManagerStatic as Image;
 
 class ClassCategory extends TimestampedModel
 {
@@ -23,5 +20,9 @@ class ClassCategory extends TimestampedModel
     public function templates(): HasMany
     {
         return $this->hasMany(ClassTemplate::class, 'category_id');
+    }
+
+    public function centers() {
+        return $this->belongsToMany(Center::class, 'class_templates', 'category_id');
     }
 }

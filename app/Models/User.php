@@ -64,4 +64,8 @@ class User extends Authenticatable
     {
         return $this->parent()->doesntExist();
     }
+
+    public function entities() {
+        return $this->belongsToMany(ClassEntity::class, 'class_entries');
+    }
 }

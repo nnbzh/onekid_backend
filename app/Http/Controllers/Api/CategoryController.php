@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Resources\CategoryResource;
+use App\Models\ClassCategory;
 use App\Services\CategoryService;
 
 class CategoryController extends Controller
@@ -15,5 +15,4 @@ class CategoryController extends Controller
     {
         return CategoryResource::collection($this->categoryService->list());
     }
-
 }

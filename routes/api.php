@@ -20,11 +20,28 @@ Route::group(['prefix' => 'v1'], function () {
         Route::apiResource('images', 'ImageController')->only(['store']);
         Route::group(['prefix' => 'user'], function () {
             Route::put('', 'UserController@update');
+            Route::get('entries', 'UserController@entries');
             Route::apiResource('children', 'ChildrenController')->except(['update', 'show']);
         });
-        Route::apiResource('categories', 'CategoryController')->only(['index'])->names([
-            'index' => 'categories.list'
-        ]);
+        Route::apiResource('categories', 'CategoryController')
+            ->only(['index'])
+            ->names(['index' => 'categories.list']);
+        Route::apiResource('categories.templates', 'ClassTemplateController')
+            ->only(['index'])
+            ->names(['index' => 'templates.list'])
+            ->shallow();
+        Route::apiResource('categories.centers', 'CenterController')
+            ->only(['index'])
+            ->names(['index' => 'centers.list'])
+            ->shallow();
+        Route::apiResource('templates.entities', 'ClassEntityController')
+            ->only(['index'])
+            ->names(['index' => 'entities.list'])
+            ->shallow();
+        Route::apiResource('entities.entries', 'ClassEntryController')
+            ->only(['store'])
+            ->names(['store' => 'entities.enter'])
+            ->shallow();
         Route::apiResource('avatars', 'AvatarPackController')->only(['index'])->names([
             'index' => 'avatars.list'
         ]);

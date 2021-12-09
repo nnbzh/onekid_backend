@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\ClassTemplateRequest;
+use App\Models\ClassCategory;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -65,7 +66,13 @@ class ClassTemplateCrudController extends CrudController
         CRUD::field('name');
         CRUD::field('description');
         CRUD::field('center_id');
-        CRUD::field('category_id');
+        CRUD::addField([
+            'name' => 'category_id',
+            'attribute' => 'name',
+            'entity' => 'classCategory',
+            'type'  => 'select',
+            'model' => ClassCategory::class
+        ]);
         CRUD::addField(['name' => 'img_src', 'type' => 'image', 'disk' => 'public']);
 
         /**
