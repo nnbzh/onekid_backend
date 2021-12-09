@@ -2,9 +2,8 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
 
-class ClassEntryResource extends JsonResource
+class ClassEntryResource extends AbstractResource
 {
     public function toArray($request)
     {

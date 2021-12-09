@@ -2,9 +2,8 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
 
-class AvatarPackResource extends JsonResource
+class AvatarPackResource extends AbstractResource
 {
     public function toArray($request)
     {

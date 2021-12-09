@@ -56,21 +56,21 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($exception instanceof InvalidCodeException) {
-            return $this->errorResponse($exception->getCode(), $exception->getMessage());
+            return $this->errorResponse(200, $exception->getMessage());
         }
 
         if ($exception instanceof SmsCodeExpiredException) {
-            return $this->errorResponse($exception->getCode(), $exception->getMessage());
+            return $this->errorResponse(200, $exception->getMessage());
         }
 
         if ($exception instanceof ThrottleRequestsException) {
-            return $this->errorResponse(400, "Вы совершили слишком много попыток, попробуйте позже.");
+            return $this->errorResponse(200, "Вы совершили слишком много попыток, попробуйте позже.");
         }
 
         if ($exception instanceof OAuthServerException) {
             $error = OAuthExceptionTranslator::translate($exception);
 
-            return $this->errorResponse($error['code'], $error['message']);
+            return $this->errorResponse(200, $error['message']);
         }
 
         return parent::render($request, $exception);

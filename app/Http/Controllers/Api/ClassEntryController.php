@@ -18,7 +18,7 @@ class ClassEntryController extends Controller
         ]);
 
         if (! $entity->isBookable() || $entity->isBookedByUser([$request->user_id])) {
-            return $this->errorResponse(400, 'Already booked or unavailable');
+            return $this->errorResponse(200, 'Already booked or unavailable');
         }
 
         return new ClassEntryResource($entity->entries()->create(['user_id' => $request->user_id]));
