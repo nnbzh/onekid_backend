@@ -16,7 +16,4 @@ class CategoryController extends Controller
         return CategoryResource::collection($this->categoryService->list());
     }
 
-    public function store(CreateCategoryRequest $request) {
-        return new CategoryResource($this->categoryService->create($request->validated()));
-    }
 }

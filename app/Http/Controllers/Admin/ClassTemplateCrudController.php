@@ -43,7 +43,7 @@ class ClassTemplateCrudController extends CrudController
         CRUD::column('description');
         CRUD::column('center_id');
         CRUD::column('category_id');
-        CRUD::column('img_src');
+        CRUD::addColumn(['name' => 'img_src', 'type' => 'image', 'disk' => 'public']);
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -66,7 +66,7 @@ class ClassTemplateCrudController extends CrudController
         CRUD::field('description');
         CRUD::field('center_id');
         CRUD::field('category_id');
-        CRUD::field('img_src');
+        CRUD::addField(['name' => 'img_src', 'type' => 'image', 'disk' => 'public']);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

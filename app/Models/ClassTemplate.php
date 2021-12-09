@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\Imageable;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ClassTemplate extends TimestampedModel
 {
-    use CrudTrait;
-    use HasFactory;
+    use CrudTrait, HasFactory, Imageable;
 
     protected $fillable = [
         'name',
