@@ -37,7 +37,7 @@ Route::group(['prefix' => 'v1'], function () {
             ->names(['index' => 'templates.list'])
             ->shallow();
         Route::apiResource('categories.centers', 'CenterController')
-            ->only(['index'])
+            ->only(['index', 'show'])
             ->names(['index' => 'centers.list'])
             ->shallow();
         Route::get('centers', 'CenterController@all');

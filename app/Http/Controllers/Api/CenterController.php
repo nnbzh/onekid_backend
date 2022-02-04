@@ -37,4 +37,8 @@ class CenterController extends Controller
 
         return response()->noContent();
     }
+
+    public function show(Center $center) {
+        return new CenterResource($center);
+    }
 }
