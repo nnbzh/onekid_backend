@@ -21,6 +21,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::group(['prefix' => 'user'], function () {
             Route::get('', 'UserController@user');
             Route::put('', 'UserController@update');
+            Route::get('centers', 'UserController@favourites');
             Route::get('entries', 'UserController@entries');
             Route::get('entries/pending', 'UserController@pendingClasses');
             Route::apiResource('children', 'ChildrenController')->except(['update', 'show']);
@@ -36,6 +37,7 @@ Route::group(['prefix' => 'v1'], function () {
             ->only(['index'])
             ->names(['index' => 'centers.list'])
             ->shallow();
+        Route::get('centers', 'CenterController@all');
         Route::post('centers/{center}/like', 'CenterController@like');
         Route::delete('centers/{center}/like', 'CenterController@dislike');
         Route::apiResource('templates.entities', 'ClassEntityController')

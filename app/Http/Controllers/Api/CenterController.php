@@ -16,6 +16,10 @@ class CenterController extends Controller
         return view('qr_code', compact(['code']));
     }
 
+    public function all(Request $request) {
+        return CenterResource::collection(Center::query()->get());
+    }
+
     public function index(ClassCategory $category) {
         return CenterResource::collection($category->centers()->paginate(20));
     }
