@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\EntryStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ClassEntryResource;
 use App\Models\ClassEntity;
+use App\Models\ClassEntry;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
@@ -22,5 +24,19 @@ class ClassEntryController extends Controller
         }
 
         return new ClassEntryResource($entity->entries()->create(['user_id' => $request->user_id]));
+    }
+
+    public function approve(ClassEntry $entry) {
+        $entry->status = EntryStatus::APPROVED;
+        $entry->saveOrFail();
+
+        return new ClassEntryResource($entry);
+    }
+
+    public function visit(ClassEntry $entry) {
+        $entry->status = EntryStatus::VISITED;
+        $entry->saveOrFail();
+
+        return new ClassEntryResource($entry);
     }
 }

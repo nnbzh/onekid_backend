@@ -21,6 +21,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::group(['prefix' => 'user'], function () {
             Route::put('', 'UserController@update');
             Route::get('entries', 'UserController@entries');
+            Route::get('entries/pending', 'UserController@pendingClasses');
             Route::apiResource('children', 'ChildrenController')->except(['update', 'show']);
         });
         Route::apiResource('categories', 'CategoryController')
@@ -34,6 +35,8 @@ Route::group(['prefix' => 'v1'], function () {
             ->only(['index'])
             ->names(['index' => 'centers.list'])
             ->shallow();
+        Route::post('centers/{center}/like', 'CenterController@like');
+        Route::delete('centers/{center}/like', 'CenterController@dislike');
         Route::apiResource('templates.entities', 'ClassEntityController')
             ->only(['index'])
             ->names(['index' => 'entities.list'])
@@ -42,6 +45,8 @@ Route::group(['prefix' => 'v1'], function () {
             ->only(['store'])
             ->names(['store' => 'entities.enter'])
             ->shallow();
+        Route::post('entries/{entry}/approve', 'ClassEntryController@approve');
+        Route::post('entries/{entry}/visit', 'ClassEntryController@visit');
         Route::apiResource('avatars', 'AvatarPackController')->only(['index'])->names([
             'index' => 'avatars.list'
         ]);

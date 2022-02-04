@@ -19,4 +19,18 @@ class CenterController extends Controller
     public function index(ClassCategory $category) {
         return CenterResource::collection($category->centers()->paginate(20));
     }
+
+    public function like(Request $request, Center $center) {
+        if ($request->user()->centers()->where('id', $center->id)->doesntExist()) {
+            $request->user()->centers()->attach($center);
+        }
+
+        return response()->noContent();
+    }
+
+    public function dislike(Request $request, Center $center) {
+        $request->user()->centers()->where('id', $center->id)->detach($center);
+
+        return response()->noContent();
+    }
 }

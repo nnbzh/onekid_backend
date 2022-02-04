@@ -68,4 +68,8 @@ class User extends Authenticatable
     public function entities() {
         return $this->belongsToMany(ClassEntity::class, 'class_entries');
     }
+
+    public function centers() {
+        return $this->belongsToMany(Center::class, 'user_center');
+    }
 }
