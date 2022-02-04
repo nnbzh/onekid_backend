@@ -50,7 +50,7 @@ class UserController extends Controller
     public function pendingClasses(Request $request) {
         $ids = array_filter(array_merge($request->user()->children()->get()->pluck('id')->toArray(), [$request->user()->id]));
         $query = ClassEntry::query()
-            ->with('user', 'entity', 'template')
+            ->with('user', 'entity', 'entity.template')
             ->where('status', EntryStatus::PENDING);
 
         if (isset($request->user_id)) {
