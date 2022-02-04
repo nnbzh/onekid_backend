@@ -14,6 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::query()->create(['email' => 'admin@admin.com', 'password' => 'admin']);
+        User::query()->updateOrCreate(['email' => 'admin@admin.com'], ['password' => 'admin']);
+        $this->call([
+            SubscriptionSeeder::class,
+            ClassEntitySeeder::class
+        ]);
     }
 }

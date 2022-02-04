@@ -16,6 +16,13 @@ class Subscription extends Model
     */
 
     protected $table = 'subscriptions';
+    protected $fillable = [
+        'name',
+        'slug',
+        'visits_per_week',
+        'price',
+        'type'
+    ];
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
