@@ -72,4 +72,8 @@ class User extends Authenticatable
     public function centers() {
         return $this->belongsToMany(Center::class, 'user_center');
     }
+
+    public function userSubscription() {
+        return $this->hasOne(UserSubscription::class);
+    }
 }

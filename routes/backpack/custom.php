@@ -21,4 +21,6 @@ Route::group([
     Route::crud('center', 'CenterCrudController');
     Route::crud('user', 'UserCrudController');
     Route::crud('avatar-pack', 'AvatarPackCrudController');
+    Route::crud('subscription', 'SubscriptionCrudController');
+    Route::crud('user-subscription', 'UserSubscriptionCrudController');
 });

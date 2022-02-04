@@ -7,3 +7,5 @@
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('class-category') }}'><i class='nav-icon la la-question'></i> Class categories</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('user') }}'><i class='nav-icon la la-question'></i> Users</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('avatar-pack') }}'><i class='nav-icon la la-question'></i> Avatar packs</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('subscription') }}'><i class='nav-icon la la-question'></i> Subscriptions</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('user-subscription') }}'><i class='nav-icon la la-question'></i> User subscriptions</a></li>

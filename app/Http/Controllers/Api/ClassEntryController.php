@@ -33,9 +33,13 @@ class ClassEntryController extends Controller
         return new ClassEntryResource($entry);
     }
 
-    public function visit(ClassEntry $entry) {
+    public function visit(ClassEntry $entry, Request $request) {
         $entry->status = EntryStatus::VISITED;
         $entry->saveOrFail();
+
+        $sub = $request->user()->userSubscription()?->first();
+        $sub->visits_remain = $sub->visits_remain - 1;
+        $sub->saveOrFail();
 
         return new ClassEntryResource($entry);
     }

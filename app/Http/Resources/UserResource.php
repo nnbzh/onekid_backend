@@ -20,7 +20,7 @@ class UserResource extends AbstractResource
             'avatar_url'    => $this->avatar_url,
             'birth_date'    => $this->birth_date                                                                        ,
             'is_registered' => ! empty($this->first_name) && ! empty($this->last_name),
-            'parent_id'     => $this->when(! $this->isParent(), $this->parent_id)
+            'parent_id'     => $this->when(! $this->isParent(), $this->parent_id),
         ];
     }
 }

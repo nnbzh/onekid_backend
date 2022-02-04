@@ -22,10 +22,13 @@ Route::group(['prefix' => 'v1'], function () {
             Route::get('', 'UserController@user');
             Route::put('', 'UserController@update');
             Route::get('centers', 'UserController@favourites');
+            Route::get('subscription', 'UserController@subscription');
+            Route::post('subscription', 'SubscriptionController@subscribe');
             Route::get('entries', 'UserController@entries');
             Route::get('entries/pending', 'UserController@pendingClasses');
             Route::apiResource('children', 'ChildrenController')->except(['update', 'show']);
         });
+        Route::get('subscriptions', 'SubscriptionController@list');
         Route::apiResource('categories', 'CategoryController')
             ->only(['index'])
             ->names(['index' => 'categories.list']);
@@ -44,12 +47,14 @@ Route::group(['prefix' => 'v1'], function () {
             ->only(['index'])
             ->names(['index' => 'entities.list'])
             ->shallow();
-        Route::apiResource('entities.entries', 'ClassEntryController')
-            ->only(['store'])
-            ->names(['store' => 'entities.enter'])
-            ->shallow();
-        Route::post('entries/{entry}/approve', 'ClassEntryController@approve');
-        Route::post('entries/{entry}/visit', 'ClassEntryController@visit');
+        Route::group(['middleware' => 'subscription.active'], function () {
+            Route::apiResource('entities.entries', 'ClassEntryController')
+                ->only(['store'])
+                ->names(['store' => 'entities.enter'])
+                ->shallow();
+            Route::post('entries/{entry}/approve', 'ClassEntryController@approve');
+            Route::post('entries/{entry}/visit', 'ClassEntryController@visit');
+        });
         Route::apiResource('avatars', 'AvatarPackController')->only(['index'])->names([
             'index' => 'avatars.list'
         ]);

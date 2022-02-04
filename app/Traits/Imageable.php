@@ -45,7 +45,7 @@ trait Imageable
             // is the public URL (everything that comes after the domain name)
             $publicDestinationPath = Str::replaceFirst('public/', '', $destinationPath);
 
-            $this->attributes[$attribute_name] = "$table$publicDestinationPath/$filename";
+            $this->attributes[$attribute_name] = "$table/$publicDestinationPath/$filename";
         }
     }
 }

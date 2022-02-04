@@ -8,6 +8,7 @@ use App\Http\Requests\InitialUpdateRequest;
 use App\Http\Resources\CenterResource;
 use App\Http\Resources\ClassEntryResource;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\UserSubscriptionResource;
 use App\Models\ClassEntry;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -66,5 +67,15 @@ class UserController extends Controller
         }
 
         return ClassEntryResource::collection($query->get());
+    }
+
+    public function subscription(Request $request) {
+        $sub = $request->user()->userSubscription()?->first();
+
+        if (! $sub) {
+            return response()->json(['data' => null]);
+        }
+
+        return new UserSubscriptionResource($sub);
     }
 }
