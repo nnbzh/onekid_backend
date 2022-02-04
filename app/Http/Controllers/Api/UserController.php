@@ -30,7 +30,7 @@ class UserController extends Controller
 
     public function entries(Request $request) {
         $ids = array_filter(array_merge($request->user()->children()->get()->pluck('id')->toArray(), [$request->user()->id]));
-        $query = ClassEntry::query()->with('user', 'entity', 'template');
+        $query = ClassEntry::query()->with('user', 'entity', 'entity.template');
 
         if (isset($request->user_id)) {
             $query->where('user_id', $request->user_id);
