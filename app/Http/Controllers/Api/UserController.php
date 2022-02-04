@@ -17,7 +17,7 @@ class UserController extends Controller
     public function __construct(private UserService $userService) {}
 
     public function user() {
-        return request()->user();
+        return new UserResource(request()->user());
     }
 
     public function update(InitialUpdateRequest $request) {

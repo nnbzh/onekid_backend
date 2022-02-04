@@ -19,6 +19,7 @@ Route::group(['prefix' => 'v1'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::apiResource('images', 'ImageController')->only(['store']);
         Route::group(['prefix' => 'user'], function () {
+            Route::get('', 'UserController@user');
             Route::put('', 'UserController@update');
             Route::get('entries', 'UserController@entries');
             Route::get('entries/pending', 'UserController@pendingClasses');
